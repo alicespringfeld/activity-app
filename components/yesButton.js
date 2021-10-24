@@ -3,7 +3,8 @@ import styles from "./yesButton.module.css";
 
 export function createYesButton(onClick) {
   const yesButton = createElement("button", {
-    textContent: "Yes",
+    className: styles.yesButton,
+    textContent: "YES!",
   });
 
   return yesButton;

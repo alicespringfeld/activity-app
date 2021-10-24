@@ -1,32 +1,22 @@
 import { createElement } from "./elements.js";
 
-export function createDropDownMenuType() {
-  const types = [
-    "education",
-    "recreational",
-    "social",
-    "diy",
-    "charity",
-    "cooking",
-    "relaxation",
-    "music",
-    "busywork",
-  ];
+export function createDropDownMenuParticipants() {
+  const participants = ["0", "1", "1<"];
 
-  const mapped = types.map((activityType) => {
+  const mapped = participants.map((activityParticipants) => {
     // because the data from the server does not look like the props that are for
     // creating an element, we go over each json object and pick the values we need
     // and give them a new name
     const props = {
-      id: activityType,
-      textContent: activityType,
-      value: activityType,
+      id: activityParticipants,
+      textContent: participants,
+      value: participants,
     };
 
     return props;
   });
 
-  const dropDownMenuType = createElement(
+  const dropDownMenuParticipants = createElement(
     "select",
     { className: "dropDownMenu" },
     [
@@ -41,6 +31,5 @@ export function createDropDownMenuType() {
       }),
     ]
   );
-
-  return dropDownMenuType;
+  return dropDownMenuParticipants;
 }

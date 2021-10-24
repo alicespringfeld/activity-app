@@ -3,6 +3,7 @@ import { createElement } from "./components/elements.js";
 import { createHeaderComponent } from "./components/headerComponent.js";
 import { createYesButton } from "./components/yesButton.js";
 import { createDropDownMenuType } from "./components/dropDownMenuType.js";
+import { createDropDownMenuParticipants } from "./components/dropDownMenuParticipants.js";
 
 async function fetchActivity(type) {
   // 1. Get Response
@@ -11,10 +12,10 @@ async function fetchActivity(type) {
   );
   // 2. call json() to convert Response to json
   // this is needed for any API call that returns json
-  const curryworschd = await response.json();
+  const question = await response.json();
 
   // 3. Return json
-  return curryworschd;
+  return question;
 }
 
 export async function createApp() {
@@ -26,7 +27,10 @@ export async function createApp() {
 
   const dropDownMenuType = createDropDownMenuType();
 
-  const submitButton = createElement("button", { textContent: "Submit" });
+  const submitButton = createElement("button", {
+    className: "submitButton",
+    textContent: "Submit",
+  });
 
   const mainElement = createElement("main", { className: "main" }, [
     createElement("h1", { textContent: "Are you bored?" }),
