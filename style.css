@@ -1,8 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo&family=Urbanist:wght@300&display=swap");
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #243434;
+  margin: 0;
+  align-items: center;
+}
+
+.main {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-family-text);
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #f4ece8;
+}
+
+:root {
+  --font-family-header: "Urbanist", sans-serif;
+  --font-family-text: "Heebo", sans-serif;
+}
+
+h1 {
+  font-family: var(--font-family-header);
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.submitButton {
+  font-family: var(--font-family-text);
+  background-color: #e3e0cf;
+  color: #243434;
+  border: none;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 2rem;
+}
+
+.dropDownMenu {
+  font-family: var(--font-family-text);
+  width: 10rem;
+  background-color: #c5d5cb;
+  border: none;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  color: #243434;
+  font-style: italic;
 }

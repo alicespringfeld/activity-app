@@ -1,6 +1,74 @@
 import "./style.css";
+import { createElement } from "./components/elements.js";
+import { createHeaderComponent } from "./components/headerComponent.js";
+import { createYesButton } from "./components/yesButton.js";
+import { createDropDownMenuType } from "./components/dropDownMenuType.js";
 
-document.querySelector("#app").innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`;
+async function fetchActivity(type) {
+  // 1. Get Response
+  const response = await fetch(
+    "http://www.boredapi.com/api/activity?type=" + type
+  );
+  // 2. call json() to convert Response to json
+  // this is needed for any API call that returns json
+  const question = await response.json();
+
+  // 3. Return json
+  return question;
+}
+
+export async function createApp() {
+  const appElement = document.querySelector("#app");
+
+  const headerElement = createHeaderComponent();
+
+  const yesButton = createYesButton();
+
+  const dropDownMenuType = createDropDownMenuType();
+
+  const submitButton = createElement("button", {
+    className: "submitButton",
+    textContent: "Submit",
+  });
+
+  const mainElement = createElement("main", { className: "main" }, [
+    createElement("h1", { textContent: "Are you bored?" }),
+
+    yesButton,
+  ]);
+
+  appElement.append(headerElement, mainElement);
+
+  let previousActivity = undefined;
+
+  //create onclick-event for enter yesButton
+  yesButton.onclick = function () {
+    while (mainElement.firstChild) {
+      mainElement.removeChild(mainElement.firstChild);
+    }
+    mainElement.append(
+      createElement("h2", { textContent: "You can choose..." }),
+      createElement("h3", { textContent: "...which kind of activity?" }),
+
+      dropDownMenuType,
+      submitButton
+    );
+  };
+
+  //create onclick-event for submitButton and
+  //fetch Activity from API, if type of activity is selected
+  submitButton.onclick = async function () {
+    const activity = await fetchActivity(dropDownMenuType.value);
+    if (previousActivity === undefined) {
+      const shownActivity = createElement("p", {
+        textContent: activity.activity,
+      });
+      mainElement.append(shownActivity);
+      previousActivity = shownActivity;
+    } else {
+      previousActivity.textContent = activity.activity;
+    }
+  };
+}
+
+createApp();
