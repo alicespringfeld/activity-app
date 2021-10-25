@@ -3,7 +3,6 @@ import { createElement } from "./components/elements.js";
 import { createHeaderComponent } from "./components/headerComponent.js";
 import { createYesButton } from "./components/yesButton.js";
 import { createDropDownMenuType } from "./components/dropDownMenuType.js";
-import { createDropDownMenuParticipants } from "./components/dropDownMenuParticipants.js";
 
 async function fetchActivity(type) {
   // 1. Get Response
@@ -42,6 +41,7 @@ export async function createApp() {
 
   let previousActivity = undefined;
 
+  //create onclick-event for enter yesButton
   yesButton.onclick = function () {
     const enterBoredPage = document.querySelector(".main");
     while (enterBoredPage.firstChild) {
@@ -56,6 +56,7 @@ export async function createApp() {
     );
   };
 
+  //create onclick-event for submitButton and fetch Activity from API, if type of activity is selected
   submitButton.onclick = async function () {
     const activity = await fetchActivity(dropDownMenuType.value);
     if (previousActivity === undefined) {
