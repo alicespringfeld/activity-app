@@ -43,9 +43,8 @@ export async function createApp() {
 
   //create onclick-event for enter yesButton
   yesButton.onclick = function () {
-    const enterBoredPage = document.querySelector(".main");
-    while (enterBoredPage.firstChild) {
-      enterBoredPage.removeChild(enterBoredPage.firstChild);
+    while (mainElement.firstChild) {
+      mainElement.removeChild(mainElement.firstChild);
     }
     mainElement.append(
       createElement("h2", { textContent: "You can choose..." }),
@@ -56,7 +55,8 @@ export async function createApp() {
     );
   };
 
-  //create onclick-event for submitButton and fetch Activity from API, if type of activity is selected
+  //create onclick-event for submitButton and
+  //fetch Activity from API, if type of activity is selected
   submitButton.onclick = async function () {
     const activity = await fetchActivity(dropDownMenuType.value);
     if (previousActivity === undefined) {
